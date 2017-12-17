@@ -1,0 +1,8 @@
+{
+    "name": "my-project",
+    "private": true,
+    "dependencies": {
+        "@sashimi-js/accounts": "file:accounts",
+        "@sashimi-js/base": "file:base"
+    }
+}
