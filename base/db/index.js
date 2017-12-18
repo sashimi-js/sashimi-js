@@ -1,7 +1,27 @@
+const knex = require('knex');
 const joinMonster = require('join-monster').default;
 
-exports.useORM = (args, context, resolveInfo) => {
+exports.resolveWithORM = (args, context, resolveInfo) => {
     return joinMonster(resolveInfo, context, (sql) => {
-        return Promise.resolve([{ id: 'foo', username: 'bar' }]);
+        return context.db.raw(sql);
     });
+}
+
+exports.createDb = () => {
+    return knex({
+        client: 'sqlite3',
+        useNullAsDefault: true,
+        connection: {
+            filename: 'test.db',
+        },
+    })
+};
+
+
+exports.dbMiddleware = (db) => {
+    return (req, res, next) => {
+        req.db = db;
+
+        next();
+    }
 }

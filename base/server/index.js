@@ -2,7 +2,22 @@ const express = require('express');
 const graphql = require('graphql');
 const graphqlHTTP = require('express-graphql');
 
-exports.createServer = ({ graph: { queryFields, rootValue }, listen }) => {
+const { createDb, dbMiddleware } = require('../db');
+
+exports.createServer = ({ concerns, listen }) => {
+
+    const db = createDb();
+
+    let queryFields = {};
+    let rootValue = {};
+
+    concerns.forEach(concern => {
+        concern.db.init(db);
+
+        queryFields = { ...queryFields, ...concern.graph.queryFields };
+        rootValue = { ...rootValue, ...concern.graph.rootValue };
+    });
+
     const server = express();
 
     const schema = new graphql.GraphQLSchema({
@@ -11,6 +26,8 @@ exports.createServer = ({ graph: { queryFields, rootValue }, listen }) => {
             fields: () => queryFields,
         }),
     });
+
+    server.use(dbMiddleware(db));
 
     server.use('/graphql', graphqlHTTP({
         schema,
