@@ -1,5 +1,7 @@
 # 🍣 sashimi.js
 
+[![npm (scoped)](https://img.shields.io/npm/v/sashimi-js.svg)]() [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+
 sashimi.js is a _full stack framework_ written in JavaScript.
 
 It combines [several existing technologies](#Stack), and provides opinionated conventions on how to structure your application.
