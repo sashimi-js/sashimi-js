@@ -1,14 +1,14 @@
-const graphql = require("graphql");
+const graphql = require('graphql');
 
-const { resolveWithORM } = require("@sashimi-js/base/db");
+const { resolveWithORM } = require('@sashimi-js/base/db');
 
 /**
  * Represents a user account
  */
 exports.AccountType = new graphql.GraphQLObjectType({
-  name: "Account",
-  uniqueKey: "id",
-  sqlTable: "account",
+  name: 'Account',
+  uniqueKey: 'id',
+  sqlTable: 'account',
   fields: () => ({
     id: { type: graphql.GraphQLID },
     name: { type: graphql.GraphQLString },

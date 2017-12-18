@@ -1,5 +1,5 @@
-const knex = require("knex");
-const joinMonster = require("join-monster").default;
+const knex = require('knex');
+const joinMonster = require('join-monster').default;
 
 exports.resolveWithORM = (args, context, resolveInfo) => {
   return joinMonster(resolveInfo, context, sql => {
@@ -9,10 +9,10 @@ exports.resolveWithORM = (args, context, resolveInfo) => {
 
 exports.createDb = () => {
   return knex({
-    client: "sqlite3",
+    client: 'sqlite3',
     useNullAsDefault: true,
     connection: {
-      filename: "test.db",
+      filename: 'test.db',
     },
   });
 };

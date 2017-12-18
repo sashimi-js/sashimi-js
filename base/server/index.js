@@ -1,8 +1,8 @@
-const express = require("express");
-const graphql = require("graphql");
-const graphqlHTTP = require("express-graphql");
+const express = require('express');
+const graphql = require('graphql');
+const graphqlHTTP = require('express-graphql');
 
-const { createDb, dbMiddleware } = require("../db");
+const { createDb, dbMiddleware } = require('../db');
 
 exports.createServer = ({ concerns, listen }) => {
   const db = createDb();
@@ -21,7 +21,7 @@ exports.createServer = ({ concerns, listen }) => {
 
   const schema = new graphql.GraphQLSchema({
     query: new graphql.GraphQLObjectType({
-      name: "Query",
+      name: 'Query',
       fields: () => queryFields,
     }),
   });
@@ -29,11 +29,11 @@ exports.createServer = ({ concerns, listen }) => {
   server.use(dbMiddleware(db));
 
   server.use(
-    "/graphql",
+    '/graphql',
     graphqlHTTP({
       schema,
       rootValue,
-      graphiql: process.env.NODE_ENV !== "production",
+      graphiql: process.env.NODE_ENV !== 'production',
     }),
   );
 
